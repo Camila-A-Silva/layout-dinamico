@@ -1,3 +1,10 @@
+:root{
+    --primary-color: #4285f4;
+    --text-color: #333;
+    --bg-color: #fff;
+    --font-family: 'Roboto', sans-serif;
+}
+
 
 *{
     margin: 0;
@@ -5,17 +12,39 @@
     box-sizing: border-box;
 }
 
-.control-group{
+.p1 .p2 .p3{
+    font-size: xx-large;
+}
 
+.p1{
+    font-family: "Open Sans", sans-serif;
+    font-size: x-large;
+}
+
+.p2{
+    font-family: "Playwhite IE", cursive;
+    font-size: x-large;
+}
+
+.p3{
+    font-family: "Bitcount Grid Double", system-ui;
+    font-size: x-large;
+}
+
+
+.control-group{
+    display: flex;
+    flex-direction: column;
 }
 
 /* Main content */
 .main{
-
+    padding: 2rem;
 }
 
 .news{
-
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 /* Dark mode styles
