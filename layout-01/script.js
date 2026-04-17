@@ -5,7 +5,7 @@ const fontSelect = document.querySelector('#font-select');
 const themeToggle = document.querySelector('#theme-toggle');
 const articleColorPicker = document.querySelector('#article-color-picker');
 const body = document.querySelector('body');
-const newsArticles = document.querySelector('.news');
+const newsArticles = document.querySelectorAll('.news');
 
 const loadPreferences = () => {
     // Cor 
@@ -18,7 +18,7 @@ const loadPreferences = () => {
     // Cor dos Artigos
     const savedArticleColor = localStorage.getItem('articleColor');
     if(savedArticleColor) {
-        document.documentElement.style.setProperty('--article-color', savedArticleColor);
+        newsArticles.forEach(article => {article.style.backgroundColor = savedArticleColor});
         articleColorPicker.value = savedArticleColor;
     }
 
@@ -33,10 +33,9 @@ const loadPreferences = () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         body.classList.add('dark');
-        themeToggle.innerHTML = '<span class="material-icons">light_mode</span>';
+        themeToggle.textContent = 'light_mode';
     }
 };
-
 
 
 
@@ -50,9 +49,7 @@ colorPicker.addEventListener('input', (e) => {
 
 articleColorPicker.addEventListener('input', (e) => {
     const color = e.target.value;
-    newsArticles.forEach(article => {
-        article.style.backgroundColor = color;
-    });
+    newsArticles.forEach(article => {article.style.backgroundColor = color;});
     localStorage.setItem('articleColor', color);
 });
 
@@ -68,9 +65,9 @@ themeToggle.addEventListener('click', () => {
     // Procura pela classe
     const isDark = body.classList.contains('dark')
 
-    themeToggle.innerHTML = isDark
-        ? '<span class="material-icons">light_mode</span>'
-        : '<span class="material-icons">dark_mode</span>';
+    themeToggle.textContent = isDark
+        ? 'light_mode'
+        : 'dark_mode';
         // if ternario
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
