@@ -1,10 +1,14 @@
-/* Inicializando um componente de menu mobile
-    Recev=be o elemento como parâmetro para permitir reutlização */
+// Inicializar comportamento do meu mobile
 
-const criarmenu = (menu) => {
-    
+export const iniciarMenu = () =>{
+
+    const menus = document.querySelectorAll('[data-menu]');
+    console.log(menus);
+    menus.forEach((menu) => {
+
     const botao = menu.querySelector('.menu__botao');
 
+    // Alterna estado do menu
     const toggleMenu = () => {
 
         menu.classList.toggle('active');
@@ -15,6 +19,7 @@ const criarmenu = (menu) => {
         botao.setAttribute('aria-label',ativo ? 'Fechar Menu' : 'Abrir Menu');
     };
 
+    // Fecha o menu ao pressionar ESC
     const fecharComEsc = (event) => {
 
         const isEsc = event.key === 'Escape';
@@ -24,14 +29,13 @@ const criarmenu = (menu) => {
             menu.classList.remove('active');
             botao.setAttribute('aria-expanded', false);
             botao.setAttribute('aria-label', 'Abrir Menu');
+            // Retorna o foco para acessibilidade
             botao.focus();
         }
     };
 
-    botao.addEventListener('click', toggleMenu);
+    botao.addEventListener('pointerdown', toggleMenu);
 
     document.addEventListener('keydown', fecharComEsc);
+    });
 };
-
-/* Inicializar todos os componentes encontrados na página */
-document.querySelectorAll('[data-menu]').forEach((menu) => criarmenu(menu));
