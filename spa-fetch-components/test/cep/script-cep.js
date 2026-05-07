@@ -1,20 +1,20 @@
-const inputCep = document.querySelector('#input__cep')
-const btnThen = document.querySelector('#btn__then')
-const btnAW = document.querySelector('#btn__aw')
+const inputCep = document.querySelector('.input__cep')
+const btnThen = document.querySelector('.btn__then')
+const btnAW = document.querySelector('.btn__aw')
 
+btnThen.addEventListener('click',() => {
+    const cep = inputCep.value
+    const url = `https://viacep.com.br/ws/${cep}/json/`
+    const consulta = fetch(url)
 
-const url = 'https://viacep.com.br/ws/${inputCep}/json/'
-const consulta = fetch(url)
-
-const then = () => {
     consulta
     // Converte o JSON para objeto e estrai os dados
-    .then((response) => {
+    .then((resposta) => {
         
-        if(!response.ok){
+        if(!resposta.ok){
             throw new Error('Erro na Requisição.')
         }
-        return response.json()
+        return resposta.json()
 
     })  
     // Exibe o dados estraídos 
@@ -29,5 +29,30 @@ const then = () => {
 
         console.warn(erro.message)
     })
-}
+})
+
+
+async function buscarCep(){
+    const cep = inputCep.value
+    const url = `https://viacep.com.br/ws/${cep}/json/`
+
+    const consulta = fetch(url);
+
+    if(!responta.ok){
+        let dataObj = await resposta.json();
+        console.log(dataObj);
+    }else{
+        throw new Error('Erro na Requisição.')
+    }
+
+
+    
+    
+};
+
+btnAW.addEventListener('click', buscarCep);
+
+
+ 
+
 

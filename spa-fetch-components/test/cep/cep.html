@@ -4,11 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
 </head>
 <body>
     <h1>Consulta de CEP</h1>
     <input id="input__cep" type="text">
     <button id="btn__then" type="button">Buscar com then()</button>
     <button id="btn__aw" type="button">Buscar com async/walt</button>
+
+
 </body>
+
+<script>
+        const inputCep = document.querySelector('#input__cep');
+        const btnThen = document.querySelector('#btn__then');
+        console.log(btnThen)
+        const btnAsync = document.querySelector('#btn__aw');
+        
+
+        btnThen.addEventListener('click', () => {
+            const cep = inputCep.value;
+            const url = `https://viacep.com.br/ws/${cep}/json/`
+            const consulta = fetch(url)
+
+            consulta
+            // Converte o JSON para objeto e estrai os dados
+            .then((resposta) => {
+                
+                if(!resposta.ok){
+                    throw new Error('Erro na Requisição.')
+                }
+                return resposta.json()
+
+            })  
+            // Exibe o dados estraídos 
+            .then((dados) => {
+
+                if (dados.erro){
+                    throw new Error('CEP inválido ou não escontrado.')
+                }
+                console.log(dados)
+            })
+            .catch((erro) => {
+
+                console.warn(erro.message)
+            })
+        });
+
+
+        async function botao_async(){
+            const cep = inputCep.value;
+            const url = `https://viacep.com.br/ws/${cep}/json/`
+
+            const consulta = fetch(url);
+
+            let resposta = await consulta
+            if(resposta.ok){
+                let respObj = await resposta.json();
+                console.log(respObj);
+            }else{
+                throw new Error('Erro na Requisição.')
+            }
+            
+        };
+
+        btnAsync.addEventListener('click', botao_async);
+
+    </script>
+
 </html>
